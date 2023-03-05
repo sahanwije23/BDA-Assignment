@@ -1,0 +1,50 @@
+s3://mybucket-assignmenttask2/input/DelayedFlights-updated.csv
+
+s3://mybucket-assignmenttask2/output
+
+
+spark-shell
+
+val df = spark.read.option("header", "true").csv("s3://mybucket-assignmenttask2/input/DelayedFlights-updated.csv")
+
+df.createOrReplaceTempView("delay_flights")
+
+-----------------------------------------------------------------------------------------------------------------
+
+spark.sql("SELECT Year, avg((CarrierDelay/ArrDelay)*100) as _C1 from delay_flights GROUP BY Year").show()
+
+val df1 = spark.sql("SELECT Year, avg((CarrierDelay/ArrDelay)*100) as _C1 from delay_flights GROUP BY Year")
+
+spark.time(df1.show())
+
+-----------------------------------------------------------------------------------------------------------------
+
+spark.sql("SELECT Year, avg((NASDelay/ArrDelay)*100) as _C2 from delay_flights GROUP BY Year").show()
+
+val df1 = spark.sql("SELECT Year, avg((NASDelay/ArrDelay)*100) as _C2 from delay_flights GROUP BY Year")
+
+spark.time(df1.show())
+
+-----------------------------------------------------------------------------------------------------------------
+
+spark.sql("SELECT Year, avg((WeatherDelay/ArrDelay)*100) as _C3 from delay_flights GROUP BY Year").show()
+
+val df1 = spark.sql("SELECT Year, avg((WeatherDelay/ArrDelay)*100) as _C3 from delay_flights GROUP BY Year")
+
+spark.time(df1.show())
+
+-----------------------------------------------------------------------------------------------------------------
+
+spark.sql("SELECT Year, avg((LateAircraftDelay/ArrDelay)*100) as _C4 from delay_flights GROUP BY Year").show()
+
+val df1 = spark.sql("SELECT Year, avg((LateAircraftDelay/ArrDelay)*100) as _C4 from delay_flights GROUP BY Year")
+
+spark.time(df1.show())
+
+-----------------------------------------------------------------------------------------------------------------
+
+spark.sql("SELECT Year, avg((SecurityDelay/ArrDelay)*100) as _C5 from delay_flights GROUP BY Year").show()
+
+val df1 = spark.sql("SELECT Year, avg((SecurityDelay/ArrDelay)*100) as _C5 from delay_flights GROUP BY Year")
+
+spark.time(df1.show())
